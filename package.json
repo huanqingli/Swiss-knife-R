@@ -1,0 +1,29 @@
+{
+  "name": "swiss-knife-start",
+  "version": "1.0.0",
+  "description": "react tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "test it"
+  },
+  "keywords": [
+    "615615"
+  ],
+  "author": "lihuanqing",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-plugin-transform-export-extensions": "^6.8.0",
+    "babel-plugin-transform-object-rest-spread": "^6.20.2",
+    "babel-preset-env": "^1.1.4",
+    "babel-preset-react": "^6.16.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.1",
+    "gulp": "^3.9.1",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "radium": "^0.18.1"
+  }
+}
