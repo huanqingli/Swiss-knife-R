@@ -10,6 +10,7 @@ import TextFieldUnderline from './textFieldUnderline'
 function isValid(value) {
     return value !== '' && value !== undefined && value !== null;
 }
+const rowsHeight=24;
 
 class TextField extends React.Component {
     constructor(props){
@@ -26,6 +27,10 @@ class TextField extends React.Component {
     componentWillMount() {
         this.uniqueId = `${this.props.floatingLabelText}-${
             Math.floor(Math.random() * 0xFFFF)}`;
+        this.setState({
+            errorText: this.props.errorText,
+            hasValue: isValid(this.props.value) || isValid(this.props.defaultValue),
+        });
     }
 
     handleInputBlur(event) {
@@ -80,7 +85,6 @@ class TextField extends React.Component {
             underlineShow,
             underlineStyle,
             rows,
-            rowsMax,
             textareaStyle,
             ...other
         } = this.props;
@@ -102,7 +106,7 @@ class TextField extends React.Component {
                 bottom: 2,
                 fontSize: 12,
                 lineHeight: '12px',
-                color: textField.errorColor,
+                color: errorStyleColor||textField.errorColor,
                 transition: transitions.easeOut(),
             },
             floatingLabel: {
@@ -125,6 +129,14 @@ class TextField extends React.Component {
             inputNative: {
                 appearance: 'textfield', // Improve type search style.
             },
+            textarea: {
+                marginTop: floatingLabelText ? 36 : 12,
+                marginBottom: floatingLabelText ? -36 : -12,
+                boxSizing: 'border-box',
+                font: 'inherit',
+                height: rows * rowsHeight,
+                resize: 'none',
+            }
         };
         const inputId = id || this.uniqueId;
         const inputProps = {
@@ -136,14 +148,11 @@ class TextField extends React.Component {
             onFocus: this.handleInputFocus,
         };
         let inputElement = multiLine ? (
-            <EnhancedTextarea
-                style={childStyleMerged}
-                textareaStyle={Object.assign(styles.textarea, styles.inputNative, textareaStyle)}
+            <textarea
+                style={[styles.input, styles.textarea, styles.inputNative, textareaStyle]}
                 rows={rows}
-                rowsMax={rowsMax}
                 {...other}
                 {...inputProps}
-                onHeightChange={this.handleHeightChange}
             />
         ) : (
             <input
@@ -153,6 +162,11 @@ class TextField extends React.Component {
                 {...inputProps}
             />
         );
+        const errorTextElement = this.state.errorText && (
+                <div style={styles.error}>
+                    {this.state.errorText}
+                </div>
+            );
         return (<div className={className} style={[styles.base,style]}>
 
             {inputElement}
@@ -168,6 +182,7 @@ class TextField extends React.Component {
                 /> :
                 null
             }
+            {errorTextElement}
 
         </div>)
     }

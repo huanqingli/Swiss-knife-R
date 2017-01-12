@@ -593,6 +593,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function isValid(value) {
     return value !== '' && value !== undefined && value !== null;
 }
+var rowsHeight = 24;
 
 var TextField = function (_React$Component) {
     _inherits(TextField, _React$Component);
@@ -617,6 +618,10 @@ var TextField = function (_React$Component) {
         key: 'componentWillMount',
         value: function componentWillMount() {
             this.uniqueId = this.props.floatingLabelText + '-' + Math.floor(Math.random() * 0xFFFF);
+            this.setState({
+                errorText: this.props.errorText,
+                hasValue: isValid(this.props.value) || isValid(this.props.defaultValue)
+            });
         }
     }, {
         key: 'handleInputBlur',
@@ -677,9 +682,8 @@ var TextField = function (_React$Component) {
                 underlineShow = _props.underlineShow,
                 underlineStyle = _props.underlineStyle,
                 rows = _props.rows,
-                rowsMax = _props.rowsMax,
                 textareaStyle = _props.textareaStyle,
-                other = _objectWithoutProperties(_props, ['children', 'className', 'disabled', 'errorStyleColor', 'errorText', 'floatingLabelFixed', 'floatingLabelFocusStyle', 'floatingLabelShrinkStyle', 'floatingLabelStyle', 'floatingLabelText', 'fullWidth', 'hintText', 'hintStyle', 'id', 'inputStyle', 'multiLine', 'onBlur', 'onChange', 'onFocus', 'style', 'type', 'underlineDisabledStyle', 'underlineFocusStyle', 'underlineShow', 'underlineStyle', 'rows', 'rowsMax', 'textareaStyle']);
+                other = _objectWithoutProperties(_props, ['children', 'className', 'disabled', 'errorStyleColor', 'errorText', 'floatingLabelFixed', 'floatingLabelFocusStyle', 'floatingLabelShrinkStyle', 'floatingLabelStyle', 'floatingLabelText', 'fullWidth', 'hintText', 'hintStyle', 'id', 'inputStyle', 'multiLine', 'onBlur', 'onChange', 'onFocus', 'style', 'type', 'underlineDisabledStyle', 'underlineFocusStyle', 'underlineShow', 'underlineStyle', 'rows', 'textareaStyle']);
 
             var styles = {
                 base: {
@@ -699,7 +703,7 @@ var TextField = function (_React$Component) {
                     bottom: 2,
                     fontSize: 12,
                     lineHeight: '12px',
-                    color: _config.textField.errorColor,
+                    color: errorStyleColor || _config.textField.errorColor,
                     transition: _transitions2.default.easeOut()
                 },
                 floatingLabel: {
@@ -719,7 +723,15 @@ var TextField = function (_React$Component) {
                     font: 'inherit',
                     WebkitTapHighlightColor: 'rgba(0,0,0,0)' },
                 inputNative: {
-                    appearance: 'textfield' }
+                    appearance: 'textfield' },
+                textarea: {
+                    marginTop: floatingLabelText ? 36 : 12,
+                    marginBottom: floatingLabelText ? -36 : -12,
+                    boxSizing: 'border-box',
+                    font: 'inherit',
+                    height: rows * rowsHeight,
+                    resize: 'none'
+                }
             };
             var inputId = id || this.uniqueId;
             var inputProps = {
@@ -732,17 +744,18 @@ var TextField = function (_React$Component) {
                 onChange: this.handleInputChange,
                 onFocus: this.handleInputFocus
             };
-            var inputElement = multiLine ? _react2.default.createElement(EnhancedTextarea, _extends({
-                style: childStyleMerged,
-                textareaStyle: Object.assign(styles.textarea, styles.inputNative, textareaStyle),
-                rows: rows,
-                rowsMax: rowsMax
-            }, other, inputProps, {
-                onHeightChange: this.handleHeightChange
-            })) : _react2.default.createElement('input', _extends({
+            var inputElement = multiLine ? _react2.default.createElement('textarea', _extends({
+                style: [styles.input, styles.textarea, styles.inputNative, textareaStyle],
+                rows: rows
+            }, other, inputProps)) : _react2.default.createElement('input', _extends({
                 type: type,
                 style: [styles.inputNative, styles.input, inputStyle]
             }, other, inputProps));
+            var errorTextElement = this.state.errorText && _react2.default.createElement(
+                'div',
+                { style: styles.error },
+                this.state.errorText
+            );
             return _react2.default.createElement(
                 'div',
                 { className: className, style: [styles.base, style] },
@@ -755,7 +768,8 @@ var TextField = function (_React$Component) {
                     focus: this.state.isFocused,
                     focusStyle: underlineFocusStyle,
                     style: underlineStyle
-                }) : null
+                }) : null,
+                errorTextElement
             );
         }
     }]);
@@ -884,6 +898,16 @@ TextFieldUnderline.defaultProps = {
     focusStyle: {},
     style: {}
 };
+TextFieldUnderline.propTypes = {
+    disabled: _react2.default.PropTypes.bool,
+    disabledStyle: _react2.default.PropTypes.object,
+    error: _react2.default.PropTypes.bool,
+    errorStyleColor: _react2.default.PropTypes.string,
+    focus: _react2.default.PropTypes.bool,
+    focusStyle: _react2.default.PropTypes.object,
+    style: _react2.default.PropTypes.object
+};
+
 exports.default = TextFieldUnderline = (0, _radium2.default)(TextFieldUnderline);
 
 },{"../config":3,"../tools/transitions":13,"radium":82,"react":252}],10:[function(require,module,exports){

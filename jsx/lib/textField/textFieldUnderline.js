@@ -67,4 +67,14 @@ TextFieldUnderline.defaultProps = {
     focusStyle: {},
     style: {},
 };
+TextFieldUnderline.propTypes = {
+    disabled: React.PropTypes.bool,
+    disabledStyle: React.PropTypes.object,
+    error: React.PropTypes.bool,
+    errorStyleColor: React.PropTypes.string,
+    focus: React.PropTypes.bool,
+    focusStyle: React.PropTypes.object,
+    style: React.PropTypes.object,
+};
+
 export default TextFieldUnderline = Radium(TextFieldUnderline);
