@@ -54,7 +54,7 @@ class Test extends React.Component {
                             icon={<FontIcon className="material-icons">computer</FontIcon>}/>图标
                 </Paper>
                 <Paper zDepth={5} style={paperStyle2}>
-                    <TextField defaultValue="aaa" />
+                    <TextField hintText="hintText" floatingLabelText="floatingLabelText" />
                 </Paper>
             </div>
             // </MuiThemeProvider>
