@@ -5,3 +5,4 @@ export FontIcon from "./fontIcon";
 export Avatar from "./avatar";
 export Paper from "./paper";
 export {TextField} from "./textField";
+export Badge from './badge'

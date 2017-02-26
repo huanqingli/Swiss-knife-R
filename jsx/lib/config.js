@@ -4,7 +4,7 @@
 import {
     cyan500, cyan700,
     pinkA200, red500, grey100, grey300, grey400, grey500, grey600, grey700,
-    transparent, lightWhite, white, darkWhite, lightBlack, black,
+    transparent, lightWhite, white, darkWhite, fullWhite, lightBlack, black, minBlack,
     darkBlack, fullBlack,
 } from './tools/colors';
 import {darken, fade, emphasize, lighten} from './tools/colorManipulator';
@@ -40,11 +40,29 @@ export const defaultSetting = {
         clockCircleColor: fade(darkBlack, 0.07),
         shadowColor: fullBlack,
     },
+    typography: {
+        // text colors
+        textFullBlack: fullBlack,
+        textDarkBlack: darkBlack,
+        textLightBlack: lightBlack,
+        textMinBlack: minBlack,
+        textFullWhite: fullWhite,
+        textDarkWhite: darkWhite,
+        textLightWhite: lightWhite,
+
+        // font weight
+        fontWeightLight: 300,
+        fontWeightNormal: 400,
+        fontWeightMedium: 500,
+
+        fontStyleButtonFontSize: 14,
+    }
 };
 
-const palette=defaultSetting.palette;
-const spacing=defaultSetting.spacing;
-const fontFamily=defaultSetting.fontFamily;
+const palette = defaultSetting.palette;
+const spacing = defaultSetting.spacing;
+const fontFamily = defaultSetting.fontFamily;
+const typography = defaultSetting.typography;
 
 export const avatar = {
     color: palette.canvasColor,
@@ -75,4 +93,14 @@ export const textField = {
     focusColor: palette.primary1Color,
     backgroundColor: 'transparent',
     borderColor: palette.borderColor,
+};
+
+export const badge = {
+    color: palette.alternateTextColor,
+    textColor: palette.textColor,
+    primaryColor: palette.primary1Color,
+    primaryTextColor: palette.alternateTextColor,
+    secondaryColor: palette.accent1Color,
+    secondaryTextColor: palette.alternateTextColor,
+    fontWeight: typography.fontWeightMedium,
 };
