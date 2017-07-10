@@ -1,0 +1,14 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "semi": [2, "never"],
+    "no-unexpected-multiline": 2,
+    "global-require": 0,
+    "react/react-in-jsx-scope": 0,
+    "react/prop-types":0
+  },
+  "env": {
+    "browser": true,//认可浏览器环境,允许windos,document
+    "jest": true
+  }
+}
