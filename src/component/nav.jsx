@@ -4,6 +4,7 @@ import {
   HOME_PAGE_ROUTE,
   FORM_PAGE_ROUTE,
   HELLO_PAGE_ROUTE,
+  DIALOG_PAGE_ROUTE,
   NOT_FOUND_DEMO_PAGE_ROUTE,
 } from '../routes'
 
@@ -14,6 +15,7 @@ const Nav = () =>
         { route: HOME_PAGE_ROUTE, label: 'Home' },
         { route: FORM_PAGE_ROUTE, label: 'form' },
         { route: HELLO_PAGE_ROUTE, label: 'Say Hello' },
+        { route: DIALOG_PAGE_ROUTE, label: 'dialog' },
         { route: NOT_FOUND_DEMO_PAGE_ROUTE, label: '404 Demo' },
       ].map(link => (
         <li key={link.route}>

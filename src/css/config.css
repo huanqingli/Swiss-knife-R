@@ -3,4 +3,12 @@
 :root{
     --primary-color1:limegreen;
     --primary-color2:blue;
+    /*color*/
+    --lightBlack : rgba(0, 0, 0, 0.54);
+
+    /*z-index*/
+    --zIndexDialog : 1500;
+
+    /*spacing*/
+    --desktopKeylineIncrement: 64,
 }
